@@ -215,7 +215,7 @@ class PdfDrawer:
         page = self.pdf[page_num - 1]
         # Create the line.
         shape = page.new_shape()
-        shape.draw_line(fitz.Point(x0, y0), fitz.Point(x1, y1))
+        shape.draw_line(fitz.Point(x0, page.rect.height - y0), fitz.Point(x1, page.rect.height - y1))
         # Draw the line.
         shape.finish(width=width, color=color, stroke_opacity=opacity)
         shape.commit()
@@ -265,7 +265,7 @@ class PdfDrawer:
         # Draw the text.
         shape = page.new_shape()
         shape.insert_text(
-            fitz.Point(x, y),
+            fitz.Point(x, page.rect.height - y),
             text,
             fontname=font_name,
             fontsize=font_size,

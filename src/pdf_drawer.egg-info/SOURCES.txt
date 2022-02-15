@@ -1,9 +1,0 @@
-README.md
-setup.py
-src/pdf_drawer/__init__.py
-src/pdf_drawer/pdf_drawer.py
-src/pdf_drawer.egg-info/PKG-INFO
-src/pdf_drawer.egg-info/SOURCES.txt
-src/pdf_drawer.egg-info/dependency_links.txt
-src/pdf_drawer.egg-info/requires.txt
-src/pdf_drawer.egg-info/top_level.txt
