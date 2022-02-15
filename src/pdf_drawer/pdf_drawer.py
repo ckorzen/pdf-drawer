@@ -163,7 +163,12 @@ class PdfDrawer:
         page = self.pdf[page_num - 1]
         # Create the rectangle.
         shape = page.new_shape()
-        shape.draw_rect(fitz.Rect(x0, y1, x1, y0))
+        shape.draw_rect(fitz.Rect(
+          x0, 
+          page.rect.height - y1,  # make the coordinates relative to the page's lower left.  
+          x1, 
+          page.rect.height - y0   # make the coordinates relative to the page's lower left.
+        ))
         # shape.draw_rect(fitz.Rect(x0, y0, x1, y1))
         # Draw the rectangle.
         shape.finish(
