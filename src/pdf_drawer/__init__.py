@@ -158,12 +158,25 @@ class PdfDrawer:
         Crops the given page to the box defined by the given coordinates.
         """
         page = self.pdf[page_num - 1]
+        print("Crop page")
+        print("rect before:", page.rect)
+        print("crop before:", page.cropbox)
+        rect = fitz.Rect(
+          max(0, x0),
+          max(0, y0),
+          min(page.rect.width, x1),
+          min(page.rect.height, y1)
+        )
+        print("croppping: ", rect)
         page.set_cropbox(fitz.Rect(
           max(0, x0),
           max(0, y0),
           min(page.rect.width, x1),
           min(page.rect.height, y1)
         ))
+        print("rect after:", page.rect)
+        print("crop after:", page.cropbox)
+
 
     def select_pages(self, page_nums: List[int]):
         """
