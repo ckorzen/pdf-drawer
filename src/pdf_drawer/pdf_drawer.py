@@ -164,9 +164,9 @@ class PdfDrawer:
         # Create the rectangle.
         shape = page.new_shape()
         shape.draw_rect(fitz.Rect(
-          x0, 
-          page.rect.height - y1,  # make the coordinates relative to the page's lower left.  
-          x1, 
+          x0,
+          page.rect.height - y1,  # make the coordinates relative to the page's lower left.
+          x1,
           page.rect.height - y0   # make the coordinates relative to the page's lower left.
         ))
         # shape.draw_rect(fitz.Rect(x0, y0, x1, y1))
@@ -277,6 +277,18 @@ class PdfDrawer:
         )
         shape.commit()
 
+    def crop_page(self, page_num: int, x0: float, y0: float, x1: float, y1: float):
+        """
+        Crops the given page to the box defined by the given coordinates.
+        """
+        page = self.pdf[page_num - 1]
+        page.set_cropbox(x0, y0, x1, y1)
+
+    def select_pages(self, page_nums: List[int]):
+        """
+        Reduces the PDF to the given pages.
+        """
+        self.pdf.select([x - 1 for x in page_nums])
 
     def save(self, output_path: str):
         """
