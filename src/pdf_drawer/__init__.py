@@ -153,6 +153,18 @@ class PdfDrawer:
             stroke_opacity=border_opacity, fill_opacity=filling_opacity)
         shape.commit()
 
+    def crop_page(self, page_num: int, x0: float, y0: float, x1: float, y1: float):
+        """
+        Crops the given page to the box defined by the given coordinates.
+        """
+        page = self.pdf[page_num - 1]
+        page.set_cropbox(x0, y0, x1, y1)
+
+    def select_pages(self, page_nums: List[int]):
+        """
+        Reduces the PDF to the given pages.
+        """
+        self.pdf.select([x - 1 for x in page_nums])
 
     def save(self, output_path: str):
         """
